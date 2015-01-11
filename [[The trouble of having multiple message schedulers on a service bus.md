@@ -1,5 +1,5 @@
-[[ opening line]]Sometimes while using a service bus you'll need to schedule messages (heartbeats, scheduled maintenance, etc.). 
-Scheduling may seem like a simple task, but if you do it wrong, it can turn out to be your greatest nightmare.
+[[ opening line]]Sometimes while using a service bus you'll need to schedule messages, such as heartbeats and scheduled maintenance. 
+Scheduling may seem like a simple task, but if you run into the problems we'll talk about here, it can turn out to be your greatest nightmare.
 
 There are many different scheduling mechanisms on a variety of service bus implementations. This post will focus on [RabbitMQ](http://www.rabbitmq.com/), [Masstransit](http://masstransit-project.com/) and [Quartz.NET](http://www.quartz-scheduler.net/).
 
@@ -19,17 +19,17 @@ Suppose we have two services that can schedule messages,  A and B. Each service 
 
 ![One sender, multiple receivers](http://www.neudesic.com/wp-content/uploads/2014/01/servicebus6.jpg)[5]*One sender, multiple receivers, message fan-out*
 
-If you scale this situation up, you are in a hell-lot-of-trouble:
-How do you distinct those messages?
-How do you cancel all those messages in time to avoid multiple deliveries of the same message?
+If you scale this situation up, you could be in a lot of trouble:
+How do you distinguish between the messages?
+How do you cancel all the messages in time to avoid multiple deliveries of the same message?
 How do you handle duplicate messages?
-What if the state of a software changes once the first message comes, how do you handle the duplicates?
+What if the state of the software changes once the first message comes. How do you handle the duplicates?
 
-We'll the solution is quite simple actually - you do not put multiple scheduling services on the same bus.
+Actually, the solution is quite simple. You don't put multiple scheduling services on the same bus.
 
-Building such a service is rather simple using RabbitMQ, Masstransit, Quartz.NET and thier integration packages.
+Building a service like this is rather simple using RabbitMQ, Masstransit, Quartz.NET, and their integration packages.
 
-First the service bus should be subscribed to the scheduling messages
+First, the service bus should be subscribed to the scheduling messages:
 ```C#
 bus = ServiceBusFactory.New(x =>
 {
@@ -44,15 +44,15 @@ bus = ServiceBusFactory.New(x =>
 	});
 }
 ```
-Once you've initiated the service bus, it's time to use the quartz service to consume those messages and do the heavy lifting of putting the deferred messages on the bus.
+Once you've initiated the service bus, it's time to use the Quartz service to consume those messages and do the heavy lifting, meaning putting the deferred messages on the bus.
 ```C#
 var scheduler = new StdSchedulerFactory().GetScheduler();
 scheduler.JobFactory = new MassTransitJobFactory(bus);
 scheduler.Start();
 ```
-A full version of the code (using topshelf as the win service bootstrapper) could be found in [this](https://github.com/MassTransit/MassTransit-Quartz/tree/master/src/MassTransit.QuartzService) GitHub repository of Masstransit-Quartz integration.
+A full version of the code (using Topshelf as the Windows service bootstrapper) can be found in [this](https://github.com/MassTransit/MassTransit-Quartz/tree/master/src/MassTransit.QuartzService) GitHub repository of Masstransit-Quartz integration.
 
-In conclusion: If the need for scheduling messages arises, you should just put up a dedicated scheduling service for the whole bus and make sure that none of the other services interfere to its functionality by removing their scheduling abilities.
+In conclusion: If you need to schedule messages, we recommend putting up a dedicated scheduling service for the whole bus and making sure that none of the other services interfere with its functionality by removing their scheduling abilities.
 
 Credits:
 
