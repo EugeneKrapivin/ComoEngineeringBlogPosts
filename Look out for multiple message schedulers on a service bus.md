@@ -1,4 +1,4 @@
-When you're using a service bus, scheduling messages, such as heartbeats and scheduled maintenance, may seem like a simple task. But if you run into the problem we'll talk about here, it can turn into your greatest nightmare.
+When you're using a service bus, scheduling messages such as heartbeats and scheduled maintenance may seem like a simple task. But if you run into the problem we'll talk about here, it can turn into your greatest nightmare.
 
 There are many different scheduling mechanisms on a variety of service bus implementations. This post will focus on [RabbitMQ](http://www.rabbitmq.com/), [Masstransit](http://masstransit-project.com/) and [Quartz.NET](http://www.quartz-scheduler.net/).
 
