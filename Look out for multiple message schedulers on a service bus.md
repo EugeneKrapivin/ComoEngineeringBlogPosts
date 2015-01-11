@@ -8,7 +8,7 @@ There are many different scheduling mechanisms on a variety of service bus imple
 
 [4]*Message bus illustration*
 
-**MassTransit** is open source, .NET-based Enterprise Service Bus (ESB) software that helps Microsoft developers route messages over service buses such as RabbitMQ, MSMQ, ActiveMQ, etc.[2]
+**MassTransit** is open source, .NET-based Enterprise Service Bus (ESB) software that helps Microsoft developers route messages over service buses such as RabbitMQ, MSMQ, and ActiveMQ.[2]
 
 **Quartz.NET** is a pure .NET library written in C# and is a port for Quartz, the very popular open source Java job scheduling framework.[3]
 
