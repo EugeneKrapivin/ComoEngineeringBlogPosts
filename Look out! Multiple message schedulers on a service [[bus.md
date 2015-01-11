@@ -1,5 +1,4 @@
-[[ opening line]]Sometimes while using a service bus you'll need to schedule messages, such as heartbeats and scheduled maintenance. 
-Scheduling may seem like a simple task, but if you run into the problems we'll talk about here, it can turn out to be your greatest nightmare.
+When you're using a service bus, scheduling messages, such as heartbeats and scheduled maintenance, may seem like a simple task. But if you run into the problem we'll talk about here, it can turn into your greatest nightmare.
 
 There are many different scheduling mechanisms on a variety of service bus implementations. This post will focus on [RabbitMQ](http://www.rabbitmq.com/), [Masstransit](http://masstransit-project.com/) and [Quartz.NET](http://www.quartz-scheduler.net/).
 
@@ -11,9 +10,9 @@ There are many different scheduling mechanisms on a variety of service bus imple
 
 **MassTransit** is open source .NET-based Enterprise Service Bus (ESB) software that helps Microsoft developers route messages over service buses such as RabbitMQ, MSMQ, ActiveMQ, etc.[2]
 
-**Quartz.NET** is a pure .NET library written in C# and [[is a port of very popular open source Java job scheduling framework, Quartz.[3]
+**Quartz.NET** is a pure .NET library written in C# and is a port for Quartz, the very popular open source Java job scheduling framework.[3]
 
-Problems and unexpected behavior will occur if more than one service on the bus can schedule messages for deferred delivery. This is due to the way that RabbitMQ routes and handles its messages.
+The problem shows up when more than one service on the bus can schedule messages for deferred delivery. This is due to the way that RabbitMQ routes and handles its messages.
 
 Suppose we have two services that can schedule messages,  A and B. Each service is subscribed to the ScheduleMessage and CancelScheduledMessage message. Let's say that another service, C, wants to schedule a message using the ScheduleMessage message. Two distinct messages will be posted to the bus, however, since there are two consumers on two different queues, this message will be duplicated for each of those services. When the time comes to deliver those messages, we see the problem: We only scheduled one message, but we get two.
 
