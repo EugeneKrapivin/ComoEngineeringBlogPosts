@@ -10,7 +10,7 @@ There are many different scheduling mechanisms on a variety of service bus imple
 
 **MassTransit** is open source, .NET-based Enterprise Service Bus (ESB) software that helps Microsoft developers route messages over service buses such as RabbitMQ, MSMQ, and ActiveMQ.[2]
 
-**Quartz.NET** is a pure .NET library written in C# and is a port for Quartz, the very popular open source Java job scheduling framework.[3]
+**Quartz.NET** is a pure .NET library written in C#. It is a port for Quartz, the very popular open source Java job scheduling framework.[3]
 
 The problem shows up when more than one service on the bus can schedule messages for deferred delivery. This is due to the way that RabbitMQ routes and handles its messages.
 
