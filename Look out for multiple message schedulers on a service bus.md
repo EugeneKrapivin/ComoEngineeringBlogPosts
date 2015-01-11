@@ -24,7 +24,7 @@ How do you cancel all the messages in time to avoid multiple deliveries of the s
 How do you handle duplicate messages?
 What if the state of the software changes once the first message comes. How do you handle the duplicates?
 
-Actually, the solution is quite simple. You don't put multiple scheduling services on the same bus.
+Actually, the solution is quite simple. You avoid putting multiple scheduling services on the same bus.
 
 Building a service like this is rather simple using RabbitMQ, Masstransit, Quartz.NET, and their integration packages.
 
