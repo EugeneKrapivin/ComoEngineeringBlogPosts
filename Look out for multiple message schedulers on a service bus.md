@@ -1,6 +1,6 @@
 When you're using a service bus, scheduling messages such as heartbeats and scheduled maintenance may seem like a simple task. But if you run into the problem we'll talk about here, it can turn into your greatest nightmare.
 
-There are many different scheduling mechanisms on a variety of service bus implementations. This post will focus on [RabbitMQ](http://www.rabbitmq.com/), [Masstransit](http://masstransit-project.com/) and [Quartz.NET](http://www.quartz-scheduler.net/).
+There are many different scheduling mechanisms on a variety of service bus implementations. This post will focus on [RabbitMQ](http://www.rabbitmq.com/), [Masstransit](http://masstransit-project.com/), and [Quartz.NET](http://www.quartz-scheduler.net/).
 
 **RabbitMQ** is open source message broker software that implements the Advanced Message Queuing Protocol ([AMQP](http://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol)). Put simply, it is a queuing system that transfers messages from one queue to another using a complex system of exchanges and routing rules.[1]
 
