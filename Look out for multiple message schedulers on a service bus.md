@@ -14,7 +14,7 @@ There are many different scheduling mechanisms on a variety of service bus imple
 
 The problem shows up when more than one service on the bus can schedule messages for deferred delivery. This is due to the way that RabbitMQ routes and handles its messages.
 
-Suppose we have two services that can schedule messages,  A and B. Each service is subscribed to the ScheduleMessage and CancelScheduledMessage message. Let's say that another service, C, wants to schedule a message using the ScheduleMessage message. Two distinct messages will be posted to the bus. Since there are two consumers on two different queues, however, the message will be duplicated for each of those services. When the time comes to deliver the messages, we see the problem: We only scheduled one message, but we got two.
+Suppose we have two services that can schedule messages,  A and B. Each service is subscribed to the ScheduleMessage and CancelScheduledMessage message. Let's say that another service, C, wants to schedule a message using the ScheduleMessage message. Only one message will be posted on the bus. Since there are two consumers on two different queues, however, the message will be duplicated for each of those services. When the time comes to deliver the messages, we see the problem: We only scheduled one message, but we got two.
 
 ![One sender, multiple receivers](http://www.neudesic.com/wp-content/uploads/2014/01/servicebus6.jpg)[5]*One sender, multiple receivers, message fan-out*
 
