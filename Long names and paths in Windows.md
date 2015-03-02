@@ -75,3 +75,5 @@ public static void DelTree(String dir) {
 } 
 ```
 Notice that all paths were prefixed with the `\\?\` string. This prefix signifies that the path is an extended length path.
+
+Using this code as a command-line tool, we've managed to successfully and efficiently remove the trouble making files and folders.
