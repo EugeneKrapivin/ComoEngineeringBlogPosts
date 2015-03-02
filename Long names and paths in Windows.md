@@ -7,7 +7,9 @@ Windows limits the length of any path to 260 characters, more than that will cau
 You have to automate a compilation of some java project. Once compilation is done, you have to delete all the by-products of the compilation that you do not need anymore.
 You try to delete the folder after extracting what you need, but it doesn't delete.
 
-`D:\Products\Web\Conduit.Mobile.PHP\tmp\427618da-bfc8-4a44-88d2-b939fadfcde0\2_20150302132731\Library\build\intermediates\classes\release\com\conduit\app\pages\branches\data\BranchesPageDataImpl$BranchesFeedDataImpl$BranchesFeedItemDataImpl$BranchesedItemOpeningHoursDataImpl$BranchesFeedItemOpeningHoursDayDataImpl$BranchesFeedItemOpeningHoursDayHoursDataImpl.class`
+```
+D:\Products\Web\Conduit.Mobile.PHP\tmp\427618da-bfc8-4a44-88d2-b939fadfcde0\2_20150302132731\Library\build\intermediates\classes\release\com\conduit\app\pages\branches\data\BranchesPageDataImpl$BranchesFeedDataImpl$BranchesFeedItemDataImpl$BranchesedItemOpeningHoursDataImpl$BranchesFeedItemOpeningHoursDayDataImpl$BranchesFeedItemOpeningHoursDayHoursDataImpl.class
+```
 
 Let me assure you, this file name is 194 characters long, the whole path is 367 characters long, which is way past the microsoft windows limit. This file could not be deleted neither, from windows explorer, nor by command line del. Since the folders are not empty, they could not be deleted as well.
 
