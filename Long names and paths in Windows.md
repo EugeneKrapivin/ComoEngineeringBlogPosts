@@ -77,3 +77,63 @@ public static void DelTree(String dir) {
 Notice that all paths were prefixed with the `\\?\` string. This prefix signifies that the path is an extended length path.
 
 Using this code as a command-line tool, we've managed to successfully and efficiently remove the trouble making files and folders.
+
+```C#
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
+
+
+namespace DelTree
+{
+    class Program
+    {
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern bool DeleteFileW(string lpFileName);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern bool RemoveDirectoryW(string lpPathName);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern long GetLastError();
+
+        public static void DelTree(String dir)
+        {
+            var files = Directory.EnumerateFileSystemEntries(dir);
+
+            foreach (var file in files)
+            {
+                if (Directory.Exists(file))
+                {
+                    DelTree(file);
+                }
+                else
+                {
+                    if (!DeleteFileW(@"\\?\" + file))
+                    {
+                        Console.WriteLine("Failed to delete " + (@"\\?\" + file) + " because " + GetLastError());    
+                    }
+                }
+            }
+
+            if (!RemoveDirectoryW(@"\\?\" + dir))
+            {
+                Console.WriteLine("Failed to delete " + (@"\\?\" + dir) + " because " + GetLastError());
+            }
+        } 
+
+        static void Main(string[] args)
+        {
+            if (args.Length != 1)
+            {
+                Console.WriteLine(Process.GetCurrentProcess().ProcessName + " <dir>");
+                return;
+            }
+
+            DelTree(Path.GetFullPath(args[0]));
+        }
+    }
+}
+
+```
