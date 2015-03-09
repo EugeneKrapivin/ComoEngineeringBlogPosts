@@ -1,21 +1,20 @@
-Lately, on a project I work on, arose the need to delete files and folders that are nested in deep heirarchies of folders.
+Has this ever happened to you? I was working on a project recently where I had to delete files and folders that are nested in deep heirarchies of folders.
 
-##### Maximum path length limitation
-Windows limits the length of any path to 260 characters, more than that will cause file/folder creation problems. Such deep heirarchies (or just long named files) can not be created in a simple manner. However, sometimes they get created, for example in the process of compilation.
+##### Maximum Path Length Limitation
+Windows limits the length of any path to 260 characters. Any more than that will cause file/folder creation problems. It is not simple to create deep heirarchies (or just long-named files. Sometimes, though, they can be created during the compilation process.
 
 ##### Scenario
-You have to automate a compilation of some java project. Once compilation is done, you have to delete all the by-products of the compilation that you do not need anymore.
-You try to delete the folder after extracting what you need, but it doesn't delete.
+To do this, first automate the compilation of a Java project. When the compilation is done, delete any by-products of the compilation that you don't need. If you try to delete the folder after extracting what you need, it won't delete.
 
 `D:\Products\Web\Conduit.Mobile.PHP\tmp\427618da-bfc8-4a44-88d2-b939fadfcde0\2_20150302132731\Library\build\intermediates\classes\release\com\conduit\app\pages\branches\data\BranchesPageDataImpl$BranchesFeedDataImpl$BranchesFeedItemDataImpl$BranchesFeedItemOpeningHoursDataImpl$BranchesFeedItemOpeningHoursDayDataImpl$BranchesFeedItemOpeningHoursDayHoursDataImpl.class`
 
-Let me assure you, this file name is 194 characters long, the whole path is 367 characters long, which is way past the microsoft windows limit. This file could not be deleted neither, from windows explorer, nor by command line del. Since the folders are not empty, they could not be deleted as well. Problem.
+Let me assure you, this file name is 194 characters long. The whole path is 367 characters long, which is way past the Windows limit. This file can also not be deleted from Windows Explorer or command line del. Since the folders aren't empty, they can't be deleted either. Problem.
 
-##### Unicode paths
-Many of the windowsAPI functions provide variations for unicode paths that actaully allow longer paths. Such paths allow up to 32,767 characters.
+##### Unicode Paths
+Many of the Windows API functions provide variations for unicode paths that actaully allow longer paths, up to 32,767 characters.
 
-##### Win32API function
-The Windows API, informally WinAPI, is Microsoft's core set of application programming interfaces (APIs) available in the Microsoft Windows operating systems. WinAPI holds various functions for manipulating files and directories, in our solution we'll use three of those:
+##### Win32API Function
+Windows API, informally WinAPI, is Microsoft's core set of APIs, available in the Microsoft Windows operating systems. WinAPI has various functions for manipulating files and directories. In our solution, we'll use three:
 
 ```language-c
 BOOL WINAPI RemoveDirectory(
@@ -27,15 +26,15 @@ BOOL WINAPI DeleteFile(
   _In_  LPCTSTR lpFileName
 );
 ```
-These function have unicode counter-parts that are suffixed with 'W', those we will use.  
+We will use the unicode counterparts of these functions that are suffixed with 'W'.  
 Another function we will use is:
 ```language-c
 DWORD WINAPI GetLastError(void);
 ```
-This function will return us the error code, incase such errors arise during the api calls.
+If errors arise during the API calls, this function will return the error code.
 
 ##### Solution
-First of all we will have to import these functions to out code from the `kernel32.dll`
+First of all, we import these functions to our code from the `kernel32.dll`
 ```language-csharp
 [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 static extern bool DeleteFileW(string lpFileName);
@@ -46,7 +45,7 @@ static extern bool RemoveDirectoryW(string lpPathName);
 [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 static extern long GetLastError();
 ```
-Now that we can use these functions in out C# code, we will write a simple recursive method called DelTree that will receive a path to a folder, and recursively delete all files and sub-folders, deleting the root folder in the end.
+Now that we can use these functions in our C# code, we'll write a simple recursive method called DelTree, which will receive a path to a folder and recursively delete all files and subfolders, deleting the root folder in the end.
 ```language-csharp
 public static void DelTree(String dir) {
     var files = Directory.EnumerateFileSystemEntries(dir);
