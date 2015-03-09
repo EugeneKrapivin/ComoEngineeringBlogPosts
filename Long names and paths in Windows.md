@@ -11,7 +11,7 @@ To do this, first automate the compilation of a Java project. When the compilati
 Let me assure you, this file name is 194 characters long. The whole path is 367 characters long, which is way past the Windows limit. You can't delete this file from Windows Explorer or command line del, either. And since the folders aren't empty, they can't be deleted. Problem.
 
 ##### Unicode Paths
-Many of the Windows API functions provide variations for unicode paths that actaully allow longer paths, up to 32,767 characters.
+Many of the Windows API functions provide variations for unicode paths that actually allow longer paths, up to 32,767 characters.
 
 ##### Win32API Function
 Windows API, informally WinAPI, is Microsoft's core set of APIs, available in the Microsoft Windows operating systems. WinAPI has various functions for manipulating files and directories. In our solution, we'll use three:
