@@ -27,6 +27,7 @@ BOOL WINAPI DeleteFile(
 );
 ```
 We'll use the unicode counterparts of these functions that are suffixed with 'W'.  
+
 Another function we will use is:
 ```language-c
 DWORD WINAPI GetLastError(void);
