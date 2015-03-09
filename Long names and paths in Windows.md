@@ -8,7 +8,7 @@ To do this, first automate the compilation of a Java project. When the compilati
 
 `D:\Products\Web\Conduit.Mobile.PHP\tmp\427618da-bfc8-4a44-88d2-b939fadfcde0\2_20150302132731\Library\build\intermediates\classes\release\com\conduit\app\pages\branches\data\BranchesPageDataImpl$BranchesFeedDataImpl$BranchesFeedItemDataImpl$BranchesFeedItemOpeningHoursDataImpl$BranchesFeedItemOpeningHoursDayDataImpl$BranchesFeedItemOpeningHoursDayHoursDataImpl.class`
 
-Let me assure you, this file name is 194 characters long. The whole path is 367 characters long, which is way past the Windows limit. This file can also not be deleted from Windows Explorer or command line del. Since the folders aren't empty, they can't be deleted either. Problem.
+Let me assure you, this file name is 194 characters long. The whole path is 367 characters long, which is way past the Windows limit. You can't delete this file from Windows Explorer or command line del, either. Since the folders aren't empty, they can't be deleted either. Problem.
 
 ##### Unicode Paths
 Many of the Windows API functions provide variations for unicode paths that actaully allow longer paths, up to 32,767 characters.
