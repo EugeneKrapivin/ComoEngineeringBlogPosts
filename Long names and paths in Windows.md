@@ -32,7 +32,7 @@ Another function we'll use is:
 ```language-c
 DWORD WINAPI GetLastError(void);
 ```
-If errors arise during the API calls, this function will return the error code.
+If errors arise during the API calls, this function will return an error code.
 
 ##### Solution
 First of all, we import these functions to our code from the `kernel32.dll`
