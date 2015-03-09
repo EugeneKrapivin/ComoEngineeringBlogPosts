@@ -1,7 +1,7 @@
 Has this ever happened to you? I was working on a project recently where I had to delete files and folders that are nested in deep heirarchies of folders.
 
 ##### Maximum Path Length Limitation
-Windows limits the length of any path to 260 characters. Any more than that will cause file/folder creation problems. It is not simple to create deep heirarchies (or just long-named files. Sometimes, though, they can be created during the compilation process.
+Windows limits the length of any path to 260 characters. Any more than that will cause file/folder creation problems. It's not simple to create deep heirarchies (or just long-named files). Sometimes, though, they can be created during the compilation process.
 
 ##### Scenario
 To do this, first automate the compilation of a Java project. When the compilation is done, delete any by-products of the compilation that you don't need. If you try to delete the folder after extracting what you need, it won't delete.
