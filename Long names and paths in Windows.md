@@ -35,7 +35,7 @@ DWORD WINAPI GetLastError(void);
 If errors arise during the API calls, this function will return an error code.
 
 ##### Solution
-First of all, we import these functions to our code from the `kernel32.dll`
+First of all, we import these functions to our code from `kernel32.dll`
 ```language-csharp
 [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
 static extern bool DeleteFileW(string lpFileName);
