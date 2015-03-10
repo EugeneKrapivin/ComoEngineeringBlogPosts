@@ -1,10 +1,10 @@
-Has this ever happened to you? I was working on a project recently where I had to delete files and folders that are nested in deep heirarchies of folders.
+Recently, I was working on a project recently where I had to delete files and folders that are nested in deep heirarchies of folders.
 
 ##### Maximum Path Length Limitation
-Windows limits the length of any path to 260 characters. Any more than that will cause file/folder creation problems. It's not simple to create deep heirarchies (or just long-named files). Sometimes, though, they can be created during the compilation process.
+Windows limits the length of any path to 260 characters. Any more than that will cause file/folder creation problems. It's not simple to create deep heirarchies (or just long-named files). Sometimes, though, with the use of specialized system calls, they could be created.
 
 ##### Scenario
-To do this, first automate the compilation of a Java project. When the compilation is done, delete any by-products of the compilation that you don't need. If you try to delete the folder after extracting what you need, it won't delete.
+During the compilation of an android project, some files are created in a very deeply nested heirarchy, with long names. Deleting any by-products of the compilation in most cases will be seamless. However in some, windows won't let you do it.
 
 `D:\Products\Web\Conduit.Mobile.PHP\tmp\427618da-bfc8-4a44-88d2-b939fadfcde0\2_20150302132731\Library\build\intermediates\classes\release\com\conduit\app\pages\branches\data\BranchesPageDataImpl$BranchesFeedDataImpl$BranchesFeedItemDataImpl$BranchesFeedItemOpeningHoursDataImpl$BranchesFeedItemOpeningHoursDayDataImpl$BranchesFeedItemOpeningHoursDayHoursDataImpl.class`
 
