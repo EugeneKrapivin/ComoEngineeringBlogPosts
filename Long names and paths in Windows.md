@@ -1,7 +1,7 @@
 Has this ever happened to you? I was working on a project recently where I had to delete files and folders that are nested in deep hierarchies of folders.
 
 ##### Maximum Path Length Limitation
-Windows limits the length of any path to 260 characters. Any more than that will cause file/folder manipulation problems. It's not trivial to create deep hierarchies (or just long-named files). Sometimes, though, they can be created during some processes (i.e. compilation process).
+Windows limits the length of any path to 260 characters. Any more than that will cause file/folder manipulation problems. It's not trivial to create deep hierarchies (or just long-named files). Sometimes, though, they can be created during a process, such as the compilation process.
 
 ##### Scenario
 During a compilation process of an android project, some files are created in very deeply nested hierarchy, with long names. Deleting any by-products of the compilation in most cases will be seamless. However in some cases, windows won't let you do it.
