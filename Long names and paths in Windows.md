@@ -1,17 +1,18 @@
-Recently, I was working on a project recently where I had to delete files and folders that are nested in deep heirarchies of folders.
+Has this ever happened to you? I was working on a project recently where I had to delete files and folders that are nested in deep hierarchies of folders.
 
 ##### Maximum Path Length Limitation
-Windows limits the length of any path to 260 characters. Any more than that will cause file/folder creation problems. It's not simple to create deep heirarchies (or just long-named files). Sometimes, though, with the use of specialized system calls, they could be created.
+Windows limits the length of any path to 260 characters. Any more than that will cause file/folder manipulation problems. It's not trivial to create deep hierarchies (or just long-named files). Sometimes, though, they can be created during some processes (i.e. compilation process).
 
 ##### Scenario
-During the compilation of an android project, some files are created in a very deeply nested heirarchy, with long names. Deleting any by-products of the compilation in most cases will be seamless. However in some, windows won't let you do it.
+During a compilation process of an android project, some files are created in very deeply nested hierarchy, with long names. Deleting any by-products of the compilation in most cases will be seamless. However in some cases, windows won't let you do it.
 
+For example, in my case, the compilation process created the following file:
 `D:\Products\Web\Conduit.Mobile.PHP\tmp\427618da-bfc8-4a44-88d2-b939fadfcde0\2_20150302132731\Library\build\intermediates\classes\release\com\conduit\app\pages\branches\data\BranchesPageDataImpl$BranchesFeedDataImpl$BranchesFeedItemDataImpl$BranchesFeedItemOpeningHoursDataImpl$BranchesFeedItemOpeningHoursDayDataImpl$BranchesFeedItemOpeningHoursDayHoursDataImpl.class`
 
-Let me assure you, this file name is 194 characters long. The whole path is 367 characters long, which is way past the Windows limit. You can't delete this file from Windows Explorer or command line del, either. And since the folders aren't empty, they can't be deleted. Problem.
+Let me assure you, this file name is 194 characters long. The whole path is 367 characters long, which is way past the Windows limit. You can't delete this file from Windows Explorer or command line `del`, either. Since the folders aren't empty, they can't be deleted.
 
 ##### Unicode Paths
-Many of the Windows API functions provide variations for unicode paths that actually allow longer paths, up to 32,767 characters.
+Many of the Windows API functions provide variations for Unicode paths that actually allow longer paths (up to 32,767 characters).
 
 ##### Win32API Function
 Windows API, informally WinAPI, is Microsoft's core set of APIs, available in the Microsoft Windows operating systems. WinAPI has various functions for manipulating files and directories. In our solution, we'll use three:
@@ -21,18 +22,20 @@ BOOL WINAPI RemoveDirectory(
   _In_  LPCTSTR lpPathName
 );
 ```
+[(reference)](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365488%28v=vs.85%29.aspx)
 ```language-c
 BOOL WINAPI DeleteFile(
   _In_  LPCTSTR lpFileName
 );
 ```
-We'll use the unicode counterparts of these functions that are suffixed with 'W'.  
+[(reference)](https://msdn.microsoft.com/en-us/library/windows/desktop/aa363915%28v=vs.85%29.aspx)
+We'll use the Unicode counterparts of these functions that are suffixed with 'W', then these functions accept an extended length path, prefixed with `\\?\`, for example, `\\?\D:\very long path`.
 
 Another function we'll use is:
 ```language-c
 DWORD WINAPI GetLastError(void);
 ```
-If errors arise during the API calls, this function will return an error code.
+If errors arise during the API calls, this function will return an [error code](https://msdn.microsoft.com/en-us/library/windows/desktop/ms681381(v=vs.85).aspx).
 
 ##### Solution
 First of all, we import these functions to our code from `kernel32.dll`
@@ -65,4 +68,3 @@ public static void DelTree(String dir) {
     }
 } 
 ```
-Notice that all paths were prefixed with the `\\?\` string. This prefix signifies that the path is an extended length path.
