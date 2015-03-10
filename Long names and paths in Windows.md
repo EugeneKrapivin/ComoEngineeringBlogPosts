@@ -4,7 +4,7 @@ Has this ever happened to you? I was working on a project recently where I had t
 Windows limits the length of any path to 260 characters. Any more than that will cause file/folder manipulation problems. It's not trivial to create deep hierarchies (or just long-named files). Sometimes, though, they can be created during a process, such as the compilation process.
 
 ##### Scenario
-During a compilation process of an android project, some files are created in very deeply nested hierarchy, with long names. Deleting any by-products of the compilation in most cases will be seamless. However in some cases, windows won't let you do it.
+During the compilation process of an android project, some files are created in a very deeply nested hierarchy, with long names. Deleting any by-products of the compilation will be seamless in most cases. In some cases, however, windows won't let you do it.
 
 For example, in my case, the compilation process created the following file:
 `D:\Products\Web\Conduit.Mobile.PHP\tmp\427618da-bfc8-4a44-88d2-b939fadfcde0\2_20150302132731\Library\build\intermediates\classes\release\com\conduit\app\pages\branches\data\BranchesPageDataImpl$BranchesFeedDataImpl$BranchesFeedItemDataImpl$BranchesFeedItemOpeningHoursDataImpl$BranchesFeedItemOpeningHoursDayDataImpl$BranchesFeedItemOpeningHoursDayHoursDataImpl.class`
