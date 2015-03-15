@@ -29,6 +29,7 @@ BOOL WINAPI DeleteFile(
 );
 ```
 [(reference)](https://msdn.microsoft.com/en-us/library/windows/desktop/aa363915%28v=vs.85%29.aspx)
+
 We'll use the Unicode counterparts of these functions that are suffixed with 'W', then these functions accept an extended length path, prefixed with `\\?\`, for example, `\\?\D:\very long path`.
 
 Another function we'll use is:
